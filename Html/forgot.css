@@ -69,3 +69,25 @@ span.psw {
         width: 100%;
     }
 }
+
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+    body {
+    margin: 0; /* pour éviter les marges */
+   text-align: center; /* pour corriger le bug de centrage IE */
+    background:url(../images/bg.jpg) top left no-repeat;
+}   
+
+footer {
+    background-color: orange;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
+    overflow:hidden;
+}
