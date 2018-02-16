@@ -1,4 +1,5 @@
 class User {
+
 	constructor(id, nickname, password, mail, token, profil) {
 		this.id = id;
 		this.nickname = nickname;
@@ -6,6 +7,10 @@ class User {
 		this.mail = mail;
 		this.token = token;
 		this.profil = profil;
+	}
+
+	parse(jsonObject) {
+		
 	}
 };
 
