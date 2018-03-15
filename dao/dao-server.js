@@ -8,6 +8,9 @@ var daoStat = require("./daoStat.js");
 var express = require('express');
 var app = express();
 
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+
 var mysql = require('mysql');
 var con = mysql.createConnection({
   host: "92.222.219.57",
@@ -27,6 +30,9 @@ app.get('/', function(req, res) {
 });
 
 app.get('/user/:tag', function(req, res) {
+	console.log(req.body);
+	console.log(req.query);
+	console.log(req.params);
 	var tag = req.params.tag;
 	if(typeof eval("daoUser."+tag) === "undefined") {
 		res.end("Error: you must pass an existing function");
@@ -35,7 +41,7 @@ app.get('/user/:tag', function(req, res) {
 	}
 });
 
-app.get('/friend/:tag', function(req, res) {
+app.post('/friend/:tag', function(req, res) {
 	var tag = req.params.tag;
 	if(typeof eval("daoFriend."+tag) === "undefined") {
 		res.end("Error: you must pass an existing function");
@@ -44,7 +50,7 @@ app.get('/friend/:tag', function(req, res) {
 	}
 });
 
-app.get('/game/:tag', function(req, res) {
+app.post('/game/:tag', function(req, res) {
 	var tag = req.params.tag;
 	if(typeof eval("daoGame."+tag) === "undefined") {
 		res.end("Error: you must pass an existing function");
@@ -53,7 +59,7 @@ app.get('/game/:tag', function(req, res) {
 	}
 });
 
-app.get('/profil/:tag', function(req, res) {
+app.post('/profil/:tag', function(req, res) {
 	var tag = req.params.tag;
 	if(typeof eval("daoProfil."+tag) === "undefined") {
 		res.end("Error: you must pass an existing function");
@@ -62,7 +68,7 @@ app.get('/profil/:tag', function(req, res) {
 	}
 });
 
-app.get('/table/:tag', function(req, res) {
+app.post('/table/:tag', function(req, res) {
 	var tag = req.params.tag;
 	if(typeof eval("daoTable."+tag) === "undefined") {
 		res.end("Error: you must pass an existing function");
@@ -71,7 +77,7 @@ app.get('/table/:tag', function(req, res) {
 	}
 });
 
-app.get('/stat/:tag', function(req, res) {
+app.post('/stat/:tag', function(req, res) {
 	var tag = req.params.tag;
 	if(typeof eval("daoStat."+tag) === "undefined") {
 		res.end("Error: you must pass an existing function");

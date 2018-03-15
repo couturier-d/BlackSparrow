@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Acceuil</title>
+	<title>Accueil</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
@@ -10,38 +10,39 @@
 </head>
 
 <body>
-	<div><img src="../includes/images/img-01.png" alt="IMG"></div>
+	<div><img src="images/img-01.png" alt="IMG"></div>
 
-	<div class ="Partie Acceuil"></div>
-		<div class>Member Login</div>
-		<div><input type="text" name="pseudo" placeholder="Pseudo"></div>
-		<div><input class="input100" type="password" name="pass" placeholder="Password"></div>
-		<div><button><a href="profil.html">Log In</a></button></div>
+	<form action="#" id="loginDiv">
+		<div>Member Login</div>
+		<div><input id="nickname" type="text" placeholder="Pseudo" required></div>
+		<div><input id="password" type="password" placeholder="Password" required></div>
+		<div id="failConnect"></div>
+		<div><input id="btnLogin" type="submit" value="Log In"></div>
+	</form>
+
+	<form action="#" id="signInDiv">
+		<div>Create Account</div>
+		<div><input id="signInNickname" type="text" placeholder="Pseudo" required></div>
+	    <div><input id="signInEmail" type="email" placeholder="Email" required></div>
+		<div><input id="signInPassword" type="password" placeholder="Mot de passe" oninput="confirmPassword()" require></div>
+		<div><input id="signInPasswordConfirm" type="password" placeholder="Confirmer le mot de passe" oninput="confirmPassword()"></div>
+		<div id="failSignIn"></div>
+	    <div><input id="btnRegister" type="submit" value="Enregistrer"></div>
+	</form>
 
 
-	<div class ="Partie Creation Compte"></div>
-		<div class>Create Account</div>
-	  	<div class="container"><label><b>Email</b></label>
-	    	<input type="text" placeholder="Enter Email">
-			<label><b>Password</b></label><input type="password" placeholder="Enter Password">
-			<label><b>Repeat Password</b></label><input type="password" placeholder="Repeat Password">
-		</div>	
-	    <div class="clearfix">
-	      <button type="submit" class="signupbtn">Sign Up</button>
-  		</div>
-
-
-	<div class ="Partie Reset Password"></div>
-		<div><span class>Forgot Password?</span></div>
-		<p>You can reset your password here.</p>
-		<input id="email" name="email" placeholder="email address" class="form-control"  type="email">
-		<button type="recover-submit" class="btn btn-lg btn-primary btn-block" value="Reset Password" type="submit">Reset Password</button>
-		<input type="hidden" class="hide" name="token" id="token" value=""> 
+	<form action="#" id="resetDiv">
+		<div>Mot de passe oublié ?</div>
+		<p>Vous pouvez réinitialiser votre mot de passe ici.</p>
+		<div><input id="resetEmail" name="email" placeholder="Adresse email" type="email" required></div>
+		<div><input id="btnPwdReset" type="submit" value="Envoyer"></div>
+	</form>
 </body>
 
 <footer>
-	<div>Forgot your Username or Password?</div>
-	<div>Create your Account</div>
+	<div onClick="showResetDiv()">Forgot your Username or Password?</div>
+	<div onClick="showSignInDiv()">Create your Account</div>
+	<div onClick="showLoginDiv()">Login</div>
 </footer>
 
 </html>

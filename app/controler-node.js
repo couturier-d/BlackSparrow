@@ -10,19 +10,17 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(express.static('./includes'));
 
+app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: true, cookie: {}}));
+
 app.post('/connect', function(req, res) {
-	console.log(req);
-	console.log(req.body.nickname);
-	console.log(req.params.nickname);
-	console.log(req.query.nickname);
-	callRequest("http://localhost:3000/user/list", "GET", {}, function(response) {
+	callRequest("http://localhost:3000/user/list", "POST", {}, function(response) {
 		response.forEach(function(user) {
 			if(user.nickname == req.body.nickname && user.password == req.body.password) {
-				session("user", user);
+				req.session.user = user;
 				return;
 			}
 		});
-		if(session.user) {
+		if(req.session.user) {
 			res.sendStatus(200);
 		} else {
 			res.sendStatus(401);
@@ -30,8 +28,22 @@ app.post('/connect', function(req, res) {
 	});
 });
 
+app.get('/disconnect', function(req, res) {
+	req.session.destroy();
+	res.sendStatus(200);
+});
+
+app.post('/register', function(req, res) {
+	let params = {nickname: req.body.nickname, password: req.body.password, mail: req.body.mail, token: 0, profil: 1};
+	console.log(params);
+	callRequest("http://localhost:3000/user/add", "POST", params, function(response) {
+		console.log(response);
+		res.sendStatus(200);
+	});
+});
+
 app.all('*', function(req, res, next) {
-	if(!session.user) {
+	if(!req.session.user) {
 		res.writeHead(401, {'Content-Type': 'text/html'});
 		fs.readFile('./views/index.html', function(err, data) {
 			res.write(data);
@@ -46,12 +58,13 @@ app.all('*', function(req, res, next) {
 app.get('/', function(req, res) {
 	fs.readFile('./views/home.html', function(err, data) {
 		res.write(data);
+		console.log(req.session.user);
 		res.end();
 	});
  });
 
  app.get('/user', function(req, res) {
-	res.end(session.user);
+	res.end(req.session.user);
  });
 
 app.use(function(req, res, next) {
@@ -59,7 +72,9 @@ app.use(function(req, res, next) {
     res.send(404, 'Page introuvable !');
 });
 
-app.listen(4000);
+app.listen(4000, function() {
+	console.log("Listening on port 4000.");
+});
 
 function callAjax(url, method, callback) {
 	var xmlHttp = new XMLHttpRequest();
@@ -79,11 +94,15 @@ function callRequest(url, method, params, callback) {
 		headers: {
 			'Accept': 'application/json',
 			'Accept-Charset': 'utf-8',
+			"Content-Type": "application/json; charset=utf-8" 
 		}
 	};
-	if(method != "GET") options.form = params;
+	if(method != "GET") {
+		options.form = params;
+	} 
 	request(options, function(error, response, body) {
 		if(error) throw error;
 		callback(JSON.parse(body));
 	});
+	console.log(options);
 }

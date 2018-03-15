@@ -15,9 +15,10 @@ module.exports = {
 		});
 	},
 
-	add: function(con, res, req) { // TODO
+	add: function(con, res, req) {
+		console.log(req.body.nickname+","+req.body.password+","+req.body.mail+","+req.body.token+","+req.body.profil);
 		var sql = "INSERT INTO user (nickname, password, mail, token, profil) " 
-				+ "VALUES ("+req.param('nickname')+","+req.param('password')+","+req.param('mail')+","+req.param('token')+","+req.param('profil')+")";
+				+ "VALUES ("+req.body.nickname+","+req.body.password+","+req.body.mail+","+req.body.token+","+req.body.profil+")";
 		con.query(sql,	function (err, result, fields) {
 			if(err) console.log("query err!"+err);
 			console.log("Result: " + JSON.stringify(result));
@@ -27,8 +28,8 @@ module.exports = {
 
 	update: function(con, res, req) {
 		var sql = "UPDATE user "
-				+ "SET nickname="+req.param('nickname')+", password="+req.param('password')+",mail="+req.param('mail')+",token="+req.param('token')+",profil="+req.param('profil')+" "
-				+ "WHERE idUser="+req.param('idUser');
+				+ "SET nickname="+req.query.nickname+", password="+req.query.password+",mail="+req.query.mail+",token="+req.query.token+",profil="+req.query.profil+" "
+				+ "WHERE idUser="+req.query.idUser;
 		con.query(sql, function(err, result, fields) {
 			if(err) console.log("query err!"+err);
 			console.log("Result: " + JSON.stringify(result));
