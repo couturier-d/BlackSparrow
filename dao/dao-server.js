@@ -29,7 +29,7 @@ app.get('/', function(req, res) {
     res.end('Serveur de requetage de la base de données');
 });
 
-app.get('/user/:tag', function(req, res) {
+app.post('/user/:tag', function(req, res) {
 	console.log(req.body);
 	console.log(req.query);
 	console.log(req.params);

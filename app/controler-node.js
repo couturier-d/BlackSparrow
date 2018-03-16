@@ -16,6 +16,7 @@ app.post('/connect', function(req, res) {
 	callRequest("http://localhost:3000/user/list", "POST", {}, function(response) {
 		response.forEach(function(user) {
 			if(user.nickname == req.body.nickname && user.password == req.body.password) {
+				console.log(user);
 				req.session.user = user;
 				return;
 			}
@@ -35,9 +36,8 @@ app.get('/disconnect', function(req, res) {
 
 app.post('/register', function(req, res) {
 	let params = {nickname: req.body.nickname, password: req.body.password, mail: req.body.mail, token: 0, profil: 1};
-	console.log(params);
 	callRequest("http://localhost:3000/user/add", "POST", params, function(response) {
-		console.log(response);
+		console.log(response); // recupere id de l'element ajouté'
 		res.sendStatus(200);
 	});
 });
@@ -50,59 +50,49 @@ app.all('*', function(req, res, next) {
 			res.end();
 		});
 	} else {
-		res.writeHead(200, {'Content-Type': 'text/html'});
 		next();
 	}
 });
 
 app.get('/', function(req, res) {
 	fs.readFile('./views/home.html', function(err, data) {
+		res.writeHead(200, {'Content-Type': 'text/html'});
 		res.write(data);
-		console.log(req.session.user);
 		res.end();
 	});
  });
 
  app.get('/user', function(req, res) {
-	res.end(req.session.user);
+	console.log("user : "+JSON.stringify(req.session.user));
+	res.setHeader("Content-Type", "application/json; charset=utf-8");
+	res.end(JSON.stringify(req.session.user));
  });
 
 app.use(function(req, res, next) {
-    res.setHeader('Content-Type', 'text/plain');
-    res.send(404, 'Page introuvable !');
+	res.setHeader("Content-Type", "text/plain");
+	res.status(404).send('Element introuvable !')
 });
 
 app.listen(4000, function() {
 	console.log("Listening on port 4000.");
 });
 
-function callAjax(url, method, callback) {
-	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.onreadystatechange = function() {
-		if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-			callback(xmlHttp.responseText);
-		}
-	}
-	xmlHttp.open(method, url, true);
-	xmlHttp.send();
-}
-
 function callRequest(url, method, params, callback) {
 	let options = {  
 		url: url,
 		method: method,
+		json: true,
 		headers: {
 			'Accept': 'application/json',
 			'Accept-Charset': 'utf-8',
 			"Content-Type": "application/json; charset=utf-8" 
-		}
+		},
 	};
 	if(method != "GET") {
-		options.form = params;
+		options.body = params;
 	} 
 	request(options, function(error, response, body) {
 		if(error) throw error;
-		callback(JSON.parse(body));
+		callback(body);
 	});
-	console.log(options);
 }

@@ -7,22 +7,26 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-	<script type="text/javascript" src="../includes/js/home.js"></script>
-	<link rel="stylesheet" type="text/css" href="../includes/css/home.css">
+	<script type="text/javascript" src="js/home.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/home.css">
 </head>
 
 <body>
   <div class="container">
     <div class="titre">Nom Casino</div>
-    <div class="token"><img src="../includes/images/icons/token.png" alt="IMG"></div>
+    <div class="token">
+		<img src="images/icons/token.png" alt="IMG">
+		<span id="tokensNumber"></span>
+	</div>
     <!-- Tab links -->
     <div class="tab">
       <button class="tablinks" onclick="openPage(event, 'Jeux')">Jeux</button>
       <button class="tablinks" onclick="openPage(event, 'Stats')">Stats</button>
       <button class="tablinks" onclick="openPage(event, 'Profil')">Profil</button>
     </div>
+	<div>Bienvenu, <span id="username"></span></div>
     <div class="logout">
-      <button><img src="../includes/images/icons/logout.png" alt="IMG"></button>
+      <button id="logoutBtn"><img src="images/icons/logout.png" alt="IMG"></button>
     </div>
 </div>
 

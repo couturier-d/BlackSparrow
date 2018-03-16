@@ -50,13 +50,13 @@
 				window.location = "/";
 			},
 			error: function(data) {
-				console.log("REGISTER ERROR");
+				$("#failSignIn").html("Erreur lors de la création du compte !");
+				$("#failSignIn").css("color","red");
 			}
 		});
 	});
 
 	$("#btnPwdReset").click(function() {
-		
 	});
 });
 

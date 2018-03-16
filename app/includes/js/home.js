@@ -1,10 +1,25 @@
+﻿let currentUser;
+
 $(document).ready(function() {
-	/*$.get('/user', function(user) {
-		console.log(user);
-		$("html").append(user);
+	$.get('/user', function(user) {
+		currentUser = user;
+		update();
 	});
-	*/
+
+	$("#logoutBtn").click(function() {
+		if(confirm("Voulez-vous vraiment vous déconnecter ?")) {
+			$.get('/disconnect', function() {
+				window.location = "/";
+			});
+		}
+	});
 });
+
+function update() {
+	if(!currentUser) return;
+	$("#tokensNumber").html(currentUser.token);
+	$("#username").html(currentUser.nickname);
+}
 
 function openPage(evt, PageName) {
     // Declare all variables
