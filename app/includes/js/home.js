@@ -13,6 +13,31 @@ $(document).ready(function() {
 			});
 		}
 	});
+
+	openPage($("#menuGameBtn"), 'Jeux');
+
+	let filterConfig = {
+		base_path: 'libs/tablefilter/',
+		paging: {
+          results_per_page: ['Lignes par page : ', [10,25,50]]
+        },
+        alternate_rows: true,
+        btn_reset: true,
+        rows_counter: true,
+        loader: true,
+        status_bar: true,
+		col_0: 'select',
+        col_1: 'select',
+        col_2: 'select',
+        col_types: [
+            'string', 'string', 'number'
+        ],
+		extensions:[{
+            name: 'sort'
+        }]
+	};
+	let tf = new TableFilter('gameTable', filterConfig);
+    tf.init();
 });
 
 function update() {
@@ -21,7 +46,7 @@ function update() {
 	$("#username").html(currentUser.nickname);
 }
 
-function openPage(evt, PageName) {
+function openPage(button, PageName) {
     // Declare all variables
     var i, tabcontent, tablinks;
 
@@ -39,5 +64,5 @@ function openPage(evt, PageName) {
 
     // Show the current tab, and add an "active" class to the button that opened the tab
     document.getElementById(PageName).style.display = "block";
-    evt.currentTarget.className += " active";
+	$(button).addClass(' active');
 }

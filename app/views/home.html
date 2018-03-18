@@ -8,6 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="js/home.js"></script>
+	<script src="libs/tablefilter/tablefilter.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/home.css">
 </head>
 
@@ -20,9 +21,9 @@
 	</div>
     <!-- Tab links -->
     <div class="tab">
-      <button class="tablinks" onclick="openPage(event, 'Jeux')">Jeux</button>
-      <button class="tablinks" onclick="openPage(event, 'Stats')">Stats</button>
-      <button class="tablinks" onclick="openPage(event, 'Profil')">Profil</button>
+      <button id="menuGameBtn" class="tablinks" onclick="openPage(this, 'Jeux')">Jeux</button>
+      <button class="tablinks" onclick="openPage(this, 'Stats')">Stats</button>
+      <button class="tablinks" onclick="openPage(this, 'Profil')">Profil</button>
     </div>
 	<div>Bienvenu, <span id="username"></span></div>
     <div class="logout">
@@ -34,17 +35,55 @@
   <!-- Tab content -->
   <div id="Jeux" class="tabcontent">
     <h3>Jeux</h3>
-    <p>la page contenant les jeux</p>
+    <p>Voici la liste des parties disponibles</p>
+    <table id="gameTable" style="width:60%">
+      <thead>
+        <tr>
+          <th>Jeu</th>
+          <th>Room</th> 
+          <th>Nb joueurs</th>
+          <th>Rejoindre</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
   </div>
 
   <div id="Stats" class="tabcontent">
     <h3>Stats</h3>
-    <p>la page contentant les stats</p> 
+    <p>Voici vos statistiques</p>
+    <table id="table", style="width:60%">
+      <thead>
+        <tr>
+          <th>Type de Jeu</th>
+          <th>Nb parties jouées</th> 
+          <th>Nb parties gagnées</th>
+          <th>Nb jetons gagnés</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table> 
   </div>
 
   <div id="Profil" class="tabcontent">
     <h3>Profil</h3>
-    <p>la page contentant la gestion profil</p>
+    <p>Gérer votre profil</p>
+    <table id="table", style="width:60%">
+      <thead>
+        <tr>
+          <th>Pseudo</th>
+          <th>Adresse mail</th>
+          <th><button class="edit_mail_btn">Changer Mail</button></th> 
+          <th>Mot de passe</th>
+          <th><button class="edit_pwd_btn">Changer Mot de passe</button></th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table> 
+
   </div>
 </body>
 
