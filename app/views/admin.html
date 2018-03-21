@@ -3,13 +3,13 @@
 <html lang="en">
 
 <head>
-	<title>Home</title>
+	<title>Admin</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-	<script type="text/javascript" src="../includes/js/home.js"></script>
+	<script type="text/javascript" src="../includes/js/admin.js"></script>
 	<script src="libs/tablefilter/tablefilter.js"></script>
-	<link rel="stylesheet" type="text/css" href="../includes/css/home.css">
+	<link rel="stylesheet" type="text/css" href="../includes/css/admin.css">
 </head>
 
 <body>
@@ -21,15 +21,14 @@
 	</div>
     <!-- Tab links -->
     <div class="tab">
-      <button id="menuGameBtn" class="tablinks" onclick="openPage(this, 'Jeux')">Jeux</button>
+       <button class="tablinks" onclick="openPage(this, 'Jeux')">Gérer Utilisateurs</button>
       <button class="tablinks" onclick="openPage(this, 'Stats')">Stats</button>
       <button class="tablinks" onclick="openPage(this, 'Profil')">Profil</button>
     </div>
 	<div class="welcome">Bienvenue, <span id="username"></span></div>
-  <div class="admin">
-    <input type=button onClick="location.href='admin.html'" value='Admin'>
+  <div class="home">
+    <input type=button onClick="location.href='home.html'" value='Home'>
   </div>
-  <div class="friends">Friends</div>
     <div class="logout">
       <button id="logoutBtn"><img src="../includes/images/icons/logout.png" alt="IMG"></button>
     </div>
@@ -38,15 +37,15 @@
 
   <!-- Tab content -->
   <div id="Jeux" class="tabcontent">
-    <h3>Jeux</h3>
-    <p>Voici la liste des parties disponibles</p>
+    <h3>Historiques</h3>
+    <p>Voici la liste des utilisateurs</p>
     <table id="gameTable" style="width:60%">
       <thead>
         <tr>
-          <th>Jeu</th>
-          <th>Room</th> 
-          <th>Nb joueurs</th>
-          <th>Rejoindre</th>
+          <th>Pseudo</th>
+          <th>Nb parties jouées</th> 
+          <th>Nb parties gagnées</th>
+          <th>Nb jetons gagnés</th>
         </tr>
       </thead>
       <tbody>
@@ -89,33 +88,7 @@
     </table> 
 
   </div>
- 
- <table id="table2">
-  <tr>
-    <td>Chercher un ami :
-     <ul>
-        <li>ami</li>
-    </td>
-  </tr>
-  <tr>
-    <td>amis connectés
-      <ul>
-        <li>ami1</li>
-        <li>ami2</li>
-        <li>ami3</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td>Liste des amis
-      <ul>
-        <li>ami1</li>
-        <li>ami2</li>
-        <li>ami3</li>
-      </ul>
-    </td>
-  </tr>
-</table>
+
 
 
 </body>
