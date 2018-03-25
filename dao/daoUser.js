@@ -7,10 +7,10 @@ module.exports = {
 	},
 
 	getById: function(con, res, req) {
-		con.query("SELECT * FROM user WHERE idUser="+req.param('idUser'), function (err, result, fields) {
+		con.query("SELECT * FROM user WHERE idUser="+req.body.idUser, function (err, result, fields) {
 			if(err) console.log("query err!"+err);
 			console.log("Result: " + JSON.stringify(result));
-			res.end(JSON.stringify(result));
+			res.end(JSON.stringify(result[0]));
 		});
 	},
 
@@ -26,8 +26,8 @@ module.exports = {
 
 	update: function(con, res, req) {
 		var sql = "UPDATE user "
-				+ "SET nickname='"+req.query.nickname+"', password='"+req.query.password+"',mail='"+req.query.mail+"',token='"+req.query.token+"',profil='"+req.query.profil+"' "
-				+ "WHERE idUser="+req.query.idUser;
+				+ "SET nickname='"+req.body.nickname+"', password='"+req.body.password+"',mail='"+req.body.mail+"',token='"+req.body.token+"',profil='"+req.body.profil+"' "
+				+ "WHERE idUser="+req.body.idUser;
 		con.query(sql, function(err, result, fields) {
 			if(err) console.log("query err!"+err);
 			console.log("Result: " + JSON.stringify(result));
@@ -36,7 +36,7 @@ module.exports = {
 	},
 
 	del: function(con, res, req) {
-		con.query("DELETE * FROM user WHERE idUser="+req.param('idUser'), function (err, result, fields) {
+		con.query("DELETE * FROM user WHERE idUser="+req.body.idUser, function (err, result, fields) {
 			if(err) console.log("query err!"+err);
 			console.log("Result: " + JSON.stringify(result));
 			res.end(JSON.stringify(result));

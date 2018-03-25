@@ -30,9 +30,6 @@ app.get('/', function(req, res) {
 });
 
 app.post('/user/:tag', function(req, res) {
-	console.log(req.body);
-	console.log(req.query);
-	console.log(req.params);
 	var tag = req.params.tag;
 	if(typeof eval("daoUser."+tag) === "undefined") {
 		res.end("Error: you must pass an existing function");

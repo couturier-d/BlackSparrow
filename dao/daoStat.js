@@ -8,7 +8,7 @@ module.exports = {
 	},
 
 	getById: function(con, res, req) {
-		con.query("SELECT * FROM stat WHERE idUser="+req.param('idUser'), function (err, result, fields) {
+		con.query("SELECT * FROM stat WHERE idUser="+req.body.idUser, function (err, result, fields) {
 			if(err) console.log("query err!"+err);
 			console.log("Result: " + JSON.stringify(result));
 			res.end(JSON.stringify(result));
@@ -17,7 +17,7 @@ module.exports = {
 
 	add: function(con, res, req) {
 		var sql = "INSERT INTO stat (idUser, idGame, nbWin, nbGame, earnedToken) "
-				+ "VALUES ("+req.param('idUser')+", "+req.param('idGame')+", "+req.param('nbWin')+", "+req.param('nbGame')+", "+req.param('earnedToken')+")";
+				+ "VALUES ("+req.body.idUser+", "+req.body.idGame+", "+req.body.nbWin+", "+req.body.nbGame+", "+req.body.earnedToken+")";
 		con.query(sql, function (err, result, fields) {
 			if(err) console.log("query err!"+err);
 			console.log("Result: " + JSON.stringify(result));
@@ -27,8 +27,8 @@ module.exports = {
 
 	update: function(con, res, req) {
 		var sql = "UPDATE stat "
-				+ "SET nbWin="+req.param('nbWin')+", nbGame="+req.param('nbGame')+", earnedToken="+req.param('earnedToken')+" "
-				+ "WHERE idUser="+req.param('idUser')+" AND idGame="+req.param('idGame');
+				+ "SET nbWin="+req.body.nbWin+", nbGame="+req.body.nbGame+", earnedToken="+req.body.earnedToken+" "
+				+ "WHERE idUser="+req.body.idUser+" AND idGame="+req.body.idGame;
 		con.query(sql, function (err, result, fields) {
 			if(err) console.log("query err!"+err);
 			console.log("Result: " + JSON.stringify(result));
@@ -37,7 +37,7 @@ module.exports = {
 	},
 
 	del: function(con, res, req) {
-		con.query("DELETE * FROM stat WHERE idUser="+req.param('idUser')+" AND idGame="+req.param('idGame'), function (err, result, fields) {
+		con.query("DELETE * FROM stat WHERE idUser="+req.body.idUser+" AND idGame="+req.body.idGame, function (err, result, fields) {
 			if(err) console.log("query err!"+err);
 			console.log("Result: " + JSON.stringify(result));
 			res.end(JSON.stringify(result));
