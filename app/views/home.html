@@ -1,121 +1,127 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<title>Home</title>
+	<title>Accueil</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-	<script type="text/javascript" src="../includes/js/home.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript" src="js/home.js"></script>
+	<script type="text/javascript" src="js/stats.js"></script>
+	<script type="text/javascript" src="js/profil.js"></script>
 	<script src="libs/tablefilter/tablefilter.js"></script>
-	<link rel="stylesheet" type="text/css" href="../includes/css/home.css">
+	<link rel="stylesheet" type="text/css" href="css/home.css">
 </head>
 
 <body>
-  <div class="container">
-    <div class="titre">Nom Casino</div>
-    <div class="token">
-		<img src="../includes/images/icons/token.png" alt="IMG">
-		<span id="tokensNumber"></span>
+	<div class="container">
+		<div class="titre">Nom Casino</div>
+		<div class="token">
+			<img src="images/icons/token.png" alt="IMG" />
+			<span id="tokensNumber"></span>
+		</div>
+		<!-- Tab links -->
+		<div class="tab">
+			<button id="menuGameBtn" class="tablinks" onclick="openPage(this, 'Jeux')">Jeux</button>
+			<button class="tablinks" onclick="openPage(this, 'Stats')">Stats</button>
+			<button class="tablinks" onclick="openPage(this, 'Profil')">Profil</button>
+		</div>
+		<div class="welcome">Bienvenue, <span id="username"></span></div>
+		<div id="adminDiv" class="admin">
+			<input type="button" onClick="location.href='admin.html'" value='Admin' />
+		</div>
+		<div class="friends">Friends</div>
+		<div class="logout">
+			<button id="logoutBtn"><img src="images/icons/logout.png" alt="IMG"></button>
+		</div>
 	</div>
-    <!-- Tab links -->
-    <div class="tab">
-      <button id="menuGameBtn" class="tablinks" onclick="openPage(this, 'Jeux')">Jeux</button>
-      <button class="tablinks" onclick="openPage(this, 'Stats')">Stats</button>
-      <button class="tablinks" onclick="openPage(this, 'Profil')">Profil</button>
-    </div>
-	<div class="welcome">Bienvenue, <span id="username"></span></div>
-  <div class="admin">
-    <input type=button onClick="location.href='admin.html'" value='Admin'>
-  </div>
-  <div class="friends">Friends</div>
-    <div class="logout">
-      <button id="logoutBtn"><img src="../includes/images/icons/logout.png" alt="IMG"></button>
-    </div>
-</div>
 
 
   <!-- Tab content -->
-  <div id="Jeux" class="tabcontent">
-    <h3>Jeux</h3>
-    <p>Voici la liste des parties disponibles</p>
-    <table id="gameTable" style="width:60%">
-      <thead>
-        <tr>
-          <th>Jeu</th>
-          <th>Room</th> 
-          <th>Nb joueurs</th>
-          <th>Rejoindre</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
-  </div>
+	<div id="Jeux" class="tabcontent">
+		<h3>Jeux</h3>
+		<p>Voici la liste des parties disponibles</p>
+		<table id="gameTable" style="width:60%">
+			<thead>
+				<tr>
+					<th>Jeu</th>
+					<th>Room</th> 
+					<th>Nb joueurs</th>
+					<th>Rejoindre</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
 
-  <div id="Stats" class="tabcontent">
-    <h3>Stats</h3>
-    <p>Voici vos statistiques</p>
-    <table id="table", style="width:60%">
-      <thead>
-        <tr>
-          <th>Type de Jeu</th>
-          <th>Nb parties jouées</th> 
-          <th>Nb parties gagnées</th>
-          <th>Nb jetons gagnés</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table> 
-  </div>
+	<div id="Stats" class="tabcontent">
+		<h3>Stats</h3>
+		<p>Voici vos statistiques</p>
+		<table id="statsTable", style="width:60%">
+			<thead>
+				<tr>
+					<th>Type de Jeu</th>
+					<th>Nb parties jouées</th> 
+					<th>Nb parties gagnées</th>
+					<th>Nb jetons gagnés</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table> 
+	</div>
 
-  <div id="Profil" class="tabcontent">
-    <h3>Profil</h3>
-    <p>Gérer votre profil</p>
-    <table id="table", style="width:60%">
-      <thead>
-        <tr>
-          <th>Pseudo</th>
-          <th>Adresse mail</th>
-          <th><button class="edit_mail_btn">Changer Mail</button></th> 
-          <th>Mot de passe</th>
-          <th><button class="edit_pwd_btn">Changer Mot de passe</button></th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table> 
+	<div id="Profil" class="tabcontent">
+		<h3>Profil</h3>
+		<p>Gérer votre profil</p>
+		<div id="nicknameProfil"></div>
 
-  </div>
+		<form action="#" id="formProfil">
+			<div><input id="mailProfil" type="email" placeholder="mail@example.fr" required/></div>
+			<div>Noueau mot de passe : <input id="password" type="password" oninput="confirmPassword()" required/></div>
+			<div>Retaper le mot de passe : <input id="passwordConfirm" type="password" oninput="confirmPassword()" required/></div>
+			<div>Mot de passe actuel : <input id="password2" type="password" required/></div>
+			<div id="failUpdate"></div>
+			<input id="updateProfil" type="submit" value="Valider" />
+		</form>
+
+
+		<!--<table id="table", style="width:60%">
+			<thead>
+				<tr>
+					<th>Pseudo</th>
+					<th>Adresse mail</th>
+					<th><button class="edit_mail_btn">Changer Mail</button></th> 
+					<th>Mot de passe</th>
+					<th><button class="edit_pwd_btn">Changer Mot de passe</button></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td id="nickname_profil"></td>
+					<td id="mail_profil"><input type="mail"/></td>
+					<td
+					<td 
+				</tr>
+			</tbody>
+		</table> -->
+	</div>
  
- <table id="table2">
-  <tr>
-    <td>Chercher un ami :
-     <ul>
-        <li>ami</li>
-    </td>
-  </tr>
-  <tr>
-    <td>amis connectés
-      <ul>
-        <li>ami1</li>
-        <li>ami2</li>
-        <li>ami3</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td>Liste des amis
-      <ul>
-        <li>ami1</li>
-        <li>ami2</li>
-        <li>ami3</li>
-      </ul>
-    </td>
-  </tr>
-</table>
+	<table id="table2">
+		<tr>
+			<td>
+				<input type='text' id="friendsSearch" placeholder="Chercher un ami" />
+				<ul id="friendsSearchResultList"></ul>
+			</td>
+		</tr>
+		<tr>
+			<td>Amis
+				<ul id="friendsList"></ul>
+			</td>
+		</tr>
+	</table>
 
 
 </body>
