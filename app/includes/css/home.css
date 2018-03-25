@@ -117,8 +117,10 @@ footer {
 #table2 {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    width: 20%;
-    float: right;
+	position: absolute;
+	right: 0.55%;
+    top: 9%;
+	border: 1px solid grey;
 }
 
 #table2 td, #table th {
@@ -138,14 +140,12 @@ footer {
     color: white;
 }
 
-
-
-
-
-
-
-
-
-
-
-
+ul#friendsList li.disconnected {
+    color: red;
+}
+ul#friendsList li.connected {
+    color: green;
+}
+ul#friendsList li span {
+    color: black;
+}
